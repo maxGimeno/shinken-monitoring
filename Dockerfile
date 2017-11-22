@@ -46,8 +46,9 @@ RUN su - shinken -c 'shinken --init' && \
     su - shinken -c 'shinken install webui2' && \
     su - shinken -c 'shinken install auth-htpasswd' && \
     su - shinken -c 'shinken install sqlitedb' && \
-    su - shinken -c 'shinken install pickle-retention-file-scheduler'&& \
-    su - shinken -c 'shinken install booster-nrpe'
+    su - shinken -c 'shinken install pickle-retention-file-scheduler' && \
+    su - shinken -c 'shinken install booster-nrpe' && \
+    su - shinken -c 'shinken install notification-smtp'
 
 # Install check_nrpe plugin
 ADD nrpe-2.15.tar.gz /usr/src/
@@ -89,13 +90,14 @@ RUN cd /usr/lib/nagios/plugins/ && \
 
 # configure supervisor
 ADD supervisor/conf.d/* /etc/supervisor/conf.d/
-
 COPY script_checks /home/shinken/script_checks
 COPY commands /etc/shinken/commands
 COPY hosts /etc/shinken/hosts
 COPY services /etc/shinken/services
 COPY brokers /etc/shinken/brokers
 COPY resource.d /etc/shinken/resource.d
+COPY contacts /etc/shinken/contacts
+COPY contactgroups /etc/shinken/contactgroups
 
 # Expose port 80 (nginx)
 EXPOSE 80
