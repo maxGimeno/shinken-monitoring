@@ -6,4 +6,6 @@ echo "\$SMTP_PASSWORD\$=$SMTP_PASSWORD" >> /etc/shinken/resource.d/smtp.cfg
 #add confidential stuff in the hosts config
 echo "_SNMPCOMMUNITY $CGAL_PASSWD" >> /etc/shinken/hosts/gauguin.cfg
 echo "}" >> /etc/shinken/hosts/gauguin.cfg
+echo "_SNMPCOMMUNITY $CGAL_PASSWD" >> /etc/shinken/hosts/friedrich.cfg
+echo "}" >> /etc/shinken/hosts/friedrich.cfg
 supervisord -c /etc/supervisor/supervisord.conf -n
